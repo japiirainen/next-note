@@ -14,4 +14,18 @@ const NoteId = () => {
    )
 }
 
+export async function getServerSideProps({ params, req, res }) {
+   const response = await fetch(`http://localhost:3000/api/notes/${params.id}`)
+
+   if (!response.ok) {
+      res.writeHead()
+   }
+   const note = await response.json()
+   return {
+      props: {
+         note,
+      },
+   }
+}
+
 export default NoteId
